@@ -2,16 +2,20 @@
 
 import { configDotenv } from "dotenv";
 import express from "express";
+import ConnectToDb from "./db/ConnectToDb.js";
+import router from "./routes/DiaryRoutes.js";
+import Diaryrouter from "./routes/DiaryRoutes.js";
 
 const app = express();
 configDotenv();
 
+app.use(express.json());
+
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-  res.send("Backend is running ✅");
-});
+app.use("/api/",Diaryrouter)
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`Server is running on Port :${PORT}`);
+  ConnectToDb();
 });
