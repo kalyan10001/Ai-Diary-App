@@ -1,5 +1,5 @@
 "use client"
-import VapiTalk from '@/components/page'
+import VapiTalk from '@/components/VapiTalk'
 import { SignedIn, SignedOut, SignInButton, SignOutButton } from '@clerk/nextjs'
 import React from 'react'
 
@@ -7,10 +7,10 @@ const page = () => {
   return (
     <div>
       <SignedOut>
-        <VapiTalk/>
+        <SignInButton/>
       </SignedOut>
       <SignedIn>
-                <SignInButton/>
+        <VapiTalk/>
         <SignOutButton/>
       </SignedIn>
     </div>
