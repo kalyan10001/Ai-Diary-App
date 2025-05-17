@@ -1,21 +1,33 @@
-import DiarySchema from "../models/DiarySchema.js";
+import Diary from "../models/DiarySchema.js";
 
-const InsertDiaryData = async (req, res) => {
+export const InsertDiaryData = async (req, res) => {
+  const { text, emotions, summary, userId } = req.body;
+
   try {
-    const { text, emotions, date } = await req.body
-
-    const newEntry = await new DiarySchema({
+    const newEntry = new Diary({
       text,
       emotions,
-      date: date ? new Date(date) : new Date(),
-    })
+      summary,
+      userId,
+    });
 
-    const savedEntry = await newEntry.save()
-    await res.status(201).json({ message: 'Diary entry saved', entry: savedEntry })
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: 'Failed to save diary entry' })
+    await newEntry.save();
+
+    res.status(201).json({ message: "Entry saved", data: newEntry });
+  } catch (error) {
+    console.error("Error saving diary entry:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
-export default InsertDiaryData;
+export const GetDiaryData = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const entries = await Diary.find({ userId }).sort({ date: -1 });
+
+    res.status(200).json(entries);
+  } catch (error) {
+    console.error("Error fetching diary entries:", error);
+    res.status(500).json({ error: "Failed to fetch entries" });
+  }
+};

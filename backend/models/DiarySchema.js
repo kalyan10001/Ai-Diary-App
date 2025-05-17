@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
 const DiaryEntrySchema = new mongoose.Schema({
   text: {
@@ -11,19 +11,18 @@ const DiaryEntrySchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true,
     default: Date.now,
   },
   summary: {
     type: String,
-    required:false
+    required: false,
   },
   userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String, 
+    required: true,
   },
-},{timeseries:true});
+});
 
-const DiarySchema=await mongoose.model("Diary",DiaryEntrySchema);
+const Diary = mongoose.model('Diary', DiaryEntrySchema);
 
-export default DiarySchema;
+export default Diary;
