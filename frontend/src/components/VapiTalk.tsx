@@ -144,7 +144,7 @@ export default function VoiceDiaryPage() {
               }`}
             />
             <div className="relative w-32 h-32 rounded-full bg-card flex items-center justify-center border border-border overflow-hidden">
-              <img src="/ai-avatar.png" alt="AI Assistant" className="w-full h-full object-cover" />
+              <img src="https://th.bing.com/th/id/OIP.rg_rgaRvu7Phi_TTnA7ASwHaHa?cb=iwp2&rs=1&pid=ImgDetMain" alt="AI Assistant" className="w-full h-full object-cover" />
             </div>
           </div>
 
@@ -219,15 +219,20 @@ export default function VoiceDiaryPage() {
         )}
       </section>
 
-      <button
-        onClick={toggleCall}
-        disabled={connecting}
-        className={`w-full py-3 rounded-md text-white font-bold text-lg ${
-          callActive ? "bg-red-600 hover:bg-red-700" : "bg-primary hover:bg-primary-dark"
-        } transition-colors duration-300`}
-      >
-        {callActive ? "Stop Recording" : connecting ? "Connecting..." : "Start Recording"}
-      </button>
+<div className="flex justify-center">
+  <button
+    onClick={toggleCall}
+    disabled={connecting}
+    className={`border-2 px-4 py-2 rounded-md font-bold text-lg transition-colors duration-300 
+      ${callActive ? "border-red-500 text-red-600 hover:bg-red-50" 
+                   : "border-blue-400 text-blue-500 hover:bg-blue-50"} 
+      ${connecting ? "opacity-50 cursor-not-allowed" : ""}
+    `}
+  >
+    {callActive ? "Stop Recording" : connecting ? "Connecting..." : "Start Recording"}
+  </button>
+</div>
+
     </main>
   );
 }
